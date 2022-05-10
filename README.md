@@ -461,73 +461,43 @@ IR remote controls, as the name would imply, make use of pulses of infrared ligh
 * Breadboard Wire
 * USB cable
 ## CIRCUIT DIAGRAM
-![](https://user-images.githubusercontent.com/95708160/151667203-5a943933-9b3b-4a36-82b2-32ad14d438d4.jpeg)
+![]![Magnificent Elzing](https://user-images.githubusercontent.com/66871603/167665286-83c352a4-be3d-4e7a-8c45-72ddde70f21b.png)
+
 ## CODE
 
 ```
-#include <IRremote.h>
-const int RECV_PIN = 4;
-const int redPin = 3; 
-const int yellowPin = 2;
-
-// Define integer to remember toggle state
-int togglestate1 = 0;
-int togglestate2 =0;
-
-// Define IR Receiver and Results Objects
-IRrecv irrecv(RECV_PIN);
-decode_results results;
-
-
-void setup(){
-  // Enable the IR Receiver
+#define IR_PIN A0 //ir recieve connect
+#include<IRremote.h>
+unsigned long receveData[]={0x80BF49B6,0x80BFC936,0x80BF33CC,0x80BF718E,0x80BFF10E,0x80BF13EC};
+bool statusData[]{0,0,0,0,0,0};
+int led[]={7,6,5,4,3,2};
+IRrecv irrecv(IR_PIN);
+decode_results  result;
+void setup(){ 
+  Serial.begin(9600);
   irrecv.enableIRIn();
-  // Set LED pins as Outputs
-  pinMode(redPin, OUTPUT);
-  pinMode(yellowPin, OUTPUT);
-}
-
-
+  for(int i=0;i<6;i++)
+    pinMode(led[i],OUTPUT);
+} 
 void loop(){
-    if (irrecv.decode(&results))
-    {
-
-        switch(results.value){
-          case 0x1FE48B7: //power buton of my remote
-        if(togglestate1==0)
-           {
-        digitalWrite(yellowPin, HIGH);
-        togglestate1=1;
-        }
-        else {
-        digitalWrite(yellowPin, LOW);
-        togglestate1=0;
-        };
-        break;
-   
-          case 0x1FE50AF: //digit one of my remote
-        // Toggle LED On or Off
-        if(togglestate2==0){
-        digitalWrite(yellowPin, HIGH);
-        togglestate2=1;
-        }
-        else {
-        digitalWrite(yellowPin, LOW);
-        togglestate2=0;
-        }
-        break;
-        
+  if(irrecv.decode(&result)){
+    Serial.println(result.value,HEX);
+    for(int i=0;i<6;i++){
+      if(result.value==receveData[i]){
+        statusData[i]=!statusData[i];
+        digitalWrite(led[i],statusData[i]);
+      }
     }
-    irrecv.resume(); 
+    irrecv.resume();
   }
-
 }
 
 ```
 ## OUTPUT
 The leds are toggled as the two buttons(power and 1)of the IR remote is pressed 
 ## OUTPUT VIDEO
-![](https://user-images.githubusercontent.com/95708160/151666706-c6d8aa96-b46b-4b8a-b0cc-b6e682fc8978.gif)
+![]![ezgif-3-29cd788d62](https://user-images.githubusercontent.com/66871603/167666228-e2c4ad6b-7d14-4ff8-a981-35371ab55ef2.gif)
+
 
 # EXP-11 POTENTIOMETER ANALOG VALUE READING
 
