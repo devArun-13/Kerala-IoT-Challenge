@@ -749,160 +749,56 @@ delay(10);
 ![WhatsApp Video 2022-05-10 at 9 43 30 PM](https://user-images.githubusercontent.com/66871603/167675239-82a289f9-630e-4123-b9a7-250117a2a817.gif)
 
 
-# ASSIGNMENT 2-Digital dice using button and seven segment display
-## Working
-Plastic and wooden dice are subject to wear and tear with time and might show biasing toward a specific number defying theory of randomness and the player as well. As this dice is completely electronic and programmed with zero bias this makes it an idle to rely on. It has a bright red light display and cheers sound when a player gets the highest number 6 of his best luck.
+# ASSIGNMENT 2-Digital dice using button and 6 LEDs
 
 ## Components Required
 * Arduino Uno
-* TM1637 7-Seven Segment Display
-* An active Buzzer
-* button Switch
+* 6-LEDs
+* push button Switch
 * 10K Ohm Resistor
 * Connecting Wires
+* 6-220K Ohm Resistor
 
 ## Connection Setup
-![](https://user-images.githubusercontent.com/95708160/151743715-e9e541b9-3728-418f-b7e2-aa572c178faf.jpeg)
+![167541050-f24bd9c8-1846-4977-a5c4-3ef96f427490](https://user-images.githubusercontent.com/66871603/167677686-177f51c2-693f-4cfe-b39c-e453dc978f1a.jpg)
 
-## Library used
- "Grove 4-Digit Display" by seed studio
  
 ## Code
 ```
-#include <TM1637.h>
-int CLK = 2;
-int DIO = 3;
-int DIC = 4;
-int BUZ = 5;
-
-int buttonState = 0;
+int led1 = 12;
+int led2 = 11;
+int led3 = 10;
+int led4 = 9;
+int led5 = 8;
+int led6 = 7;
+int button = 6;
 int randNum = 0;
-
-TM1637 tm(CLK, DIO);
-
 void setup() {
-  pinMode(DIC, INPUT);
-  pinMode(BUZ, OUTPUT);
-  Serial.begin(9600);
-
-  //define state of pins
-  digitalWrite(DIC, LOW);
-  
-
-  //initializes the pseudo-random number generator
+  // put your setup code here, to run once:
   randomSeed(analogRead(0));
 
-  //initialize TM1637 seven segment display
-  tm.init();
+  pinMode(button,INPUT);
 
-  //set brightness; 0-7
-  tm.set(2);
-  tm.init();
+  pinMode(led1,OUTPUT);
+  pinMode(led2,OUTPUT);
+  pinMode(led3,OUTPUT);
+  pinMode(led4,OUTPUT);
+  pinMode(led5,OUTPUT);
+  pinMode(led6,OUTPUT);
+
 }
-
-
 
 void loop() {
   // put your main code here, to run repeatedly:
-
-  //read button
-  buttonState = digitalRead(DIC);
-
-  //decision taking
-  if (buttonState == HIGH)
+  if(digitalRead(button)==HIGH)
   {
-    randNum = random(1, 7);    
-    Serial.println(randNum);  
-
-    //switch case
-    // tm.display(position, character);
-    switch (randNum) {
-      case 1:
-        tm.display(0, 1);
-        tm.display(1, 1);
-        tm.point(1);
-        tm.display(2, 1);
-        tm.display(3, 1);
-        delay(5000);
-        randNum = 0;
-        break;
-      case 2:
-        tm.display(0, 2);
-        tm.display(1, 2);
-        tm.point(1);
-        tm.display(2, 2);
-        tm.display(3, 2);
-        delay(5000);
-        randNum = 0;
-        break;
-      case 3:
-        tm.display(0, 3);
-        tm.display(1, 3);
-        tm.point(1);
-        tm.display(2, 3);
-        tm.display(3, 3);
-        delay(5000);
-        randNum = 0;
-        break;
-      case 4:
-        tm.display(0, 4);
-        tm.display(1, 4);
-        tm.point(1);
-        tm.display(2, 4);
-        tm.display(3, 4);
-        delay(5000);
-        randNum = 0;
-        break;
-      case 5:
-        tm.display(0, 5);
-        tm.display(1, 5);
-        tm.point(1);
-        tm.display(2, 5);
-        tm.display(3, 5);
-        delay(5000);
-        randNum = 0;
-        break;
-      case 6:
-        tm.display(0, 6);
-        tm.display(1, 6);
-        tm.point(1);
-        tm.display(2, 6);
-        tm.display(3, 6);
-        digitalWrite(BUZ, HIGH);
-        delay(1000);
-        digitalWrite(BUZ, LOW);
-        randNum = 0;
-        break;
-    }
-    buttonState = 0;  
-    randNum = 0;     
-
+    randNum = random(7,13);
+    digitalWrite(randNum,HIGH);
+    delay(2000);
+    digitalWrite(randNum,LOW);
   }
-
-
-
-  else
-  {
-
-    tm.display(0, 0);
-    tm.display(1, 0);
-    tm.point(1);
-    tm.display(2, 0);
-    tm.display(3, 0);
-
-    buttonState = 0;
-    randNum = 0;
-  }
-
 }
-
 ```
-## Output Giff
-![](https://user-images.githubusercontent.com/95708160/151743823-64b7375f-c310-4986-a49d-80497d79a3d4.gif)
-## Output Video
-![](https://github.com/anselllo/Kerala-IoT-Challenge/issues/34#issue-1118994663)
-## New knowledge attained
-FUNCTION-randomSeed(analogRead(0));
-Computers are really bad at generating random numbers because they always follow the same set of instructions. You need to give them a random starting point, otherwise the instructions they follow would always produce the same result. That starting point is called the seed.
+## Output Gif
+![ezgif-3-ae74864a10](https://user-images.githubusercontent.com/66871603/167683194-11fb73d4-b408-4f21-8758-5cc0388be1b3.gif)
 
-In this case the code reads the value of an unconnected analog input and uses that as the seed. That's pretty random because unconnected pins basically act like antennas and pick up environmental electromagnetic fields(An unconnected igital pin can show miute variations in signals )
