@@ -6,9 +6,9 @@
 # About Me
 Hi,everyone I am Arun Mathew ,Currently pursuing B-tech from RIT Kotayam,My field of intrests are
 * Robotics
-* IoT
+* 3D printing
 * Automation
-* Projects 
+* Mechanical design
 
 # Experiment-1 HELLO WORLD LED BLINKING
 Iintoduction to Arduino IDE and Its programming is intended here
