@@ -461,7 +461,7 @@ IR remote controls, as the name would imply, make use of pulses of infrared ligh
 * Breadboard Wire
 * USB cable
 ## CIRCUIT DIAGRAM
-![]![Magnificent Elzing](https://user-images.githubusercontent.com/66871603/167665286-83c352a4-be3d-4e7a-8c45-72ddde70f21b.png)
+[Magnificent Elzing](https://user-images.githubusercontent.com/66871603/167665286-83c352a4-be3d-4e7a-8c45-72ddde70f21b.png)
 
 ## CODE
 
@@ -496,7 +496,7 @@ void loop(){
 ## OUTPUT
 The leds are toggled as the two buttons(power and 1)of the IR remote is pressed 
 ## OUTPUT VIDEO
-![]![ezgif-3-29cd788d62](https://user-images.githubusercontent.com/66871603/167666228-e2c4ad6b-7d14-4ff8-a981-35371ab55ef2.gif)
+[ezgif-3-29cd788d62](https://user-images.githubusercontent.com/66871603/167666228-e2c4ad6b-7d14-4ff8-a981-35371ab55ef2.gif)
 
 
 # EXP-11 POTENTIOMETER ANALOG VALUE READING
@@ -514,33 +514,30 @@ the potentiometer will act as a variable resistor. When you turn the knob, the r
 
 *USB cable
 ## Circuit diagram
-![](https://user-images.githubusercontent.com/95708160/151667184-0d894c11-c32e-4a42-91bc-801e97efbf87.jpeg)
+![Frantic Tumelo-Blad](https://user-images.githubusercontent.com/66871603/167667574-97dd7974-77c5-4bb7-8f36-60cedbeac6b6.png)
+
 ## Code
 ```
-int pot=A0;
-int led=9;
-int val=0;
-void setup() {
-
-  pinMode(pot,INPUT);
-  pinMode(led,OUTPUT);
-  Serial.begin(9600);
- 
-  
+int potpin=0;// initialize analog pin 0
+int ledpin=13;// initialize digital pin 13
+int val=0;// define val, assign initial value 0
+void setup()
+{
+pinMode(ledpin,OUTPUT);// set digital pin as “output”
+Serial.begin(9600);// set baud rate at 9600
 }
-
 void loop()
 {
-  val=analogRead(pot);
-  Serial.println(val);
-  analogWrite(led,val/4);
-  
-
+digitalWrite(ledpin,HIGH);// turn on the LED on pin 13
+delay(50);// wait for 0.05 second
+digitalWrite(ledpin,LOW);// turn off the LED on pin 13
+delay(50);// wait for 0.05 second
+val=analogRead(potpin);// read the analog value of analog pin 0, and assign it to val 
+Serial.println(val);// display val’s value
 }
 
 ```
-## improvisation
-The data from the potentiometer is used to dim an Led by using analogWrite() function.
+
 
 ## OUTPUT
 ![](https://user-images.githubusercontent.com/95708160/151671652-3e4f1ee0-4aa3-4108-a8bf-9b4cd1ebf58c.png)
@@ -727,11 +724,12 @@ when the lights fade out the LED should automatically fix the light
  * USB cable
  
 ## CIRCUIT DIAGRAM
-![](https://user-images.githubusercontent.com/95708160/151667212-71587939-2c72-4206-8c25-1c2cc3934596.jpeg)
+![Mighty Hango-Allis](https://user-images.githubusercontent.com/66871603/167676471-9cbd239a-7f71-4657-b715-5e6e4a4f35e2.png)
+
 ## CODE
 ```
 int potpin=0;
-int ledpin=11; 
+int ledpin=7; 
 int val=0;
 void setup()
 {
@@ -748,7 +746,8 @@ delay(10);
 
 ```
 ## OUTPUT
-![](https://user-images.githubusercontent.com/95708160/151668761-be8c85e8-96e1-44e5-9d22-ca6f18b436b7.gif)
+![WhatsApp Video 2022-05-10 at 9 43 30 PM](https://user-images.githubusercontent.com/66871603/167675239-82a289f9-630e-4123-b9a7-250117a2a817.gif)
+
 
 # ASSIGNMENT 2-Digital dice using button and seven segment display
 ## Working
